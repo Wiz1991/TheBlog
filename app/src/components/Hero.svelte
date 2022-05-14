@@ -1,5 +1,5 @@
 <section
-	class="container max-w-full px-4 py-32 mx-auto text-left md:max-w-none md:text-center bg-hero-pattern h-screen bg-bottom bg-cover "
+	class="container max-w-full px-4 py-32 mx-auto text-left md:max-w-none md:text-center bg-hero-pattern h-screen bg-bottom bg-cover dark:bg-gray-800 "
 >
 	<h1
 		class="text-5xl font-extrabold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:leading-none md:text-6xl lg:text-7xl select-none"

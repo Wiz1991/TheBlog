@@ -5,19 +5,17 @@
 </script>
 
 <div
-	class="max-w-2xl px-5 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-700"
+	class="max-w-2xl px-5 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800"
 	style="cursor: auto;"
 >
 	<div class="flex items-center justify-between">
 		<span class="text-sm font-light text-gray-600 dark:text-gray-400">Jan 15, 2022</span>
 		<ul class="flex gap-2">
 			{#each tags as tag}
-				<li>
-					<a
-						href="#_"
-						class="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
-						>tag</a
-					>
+				<li
+					class="px-4 py-1 text-sm font-bold text-gray-100 transition-colors duration-200 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+				>
+					{tag}
 				</li>
 			{/each}
 		</ul>
