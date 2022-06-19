@@ -19,16 +19,16 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['htpp://localhost:3000','localhost', 'http://localhost:8000', '*'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['X-Custom-Header', 'Upgrade-Insecure-Requests', '*'],
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

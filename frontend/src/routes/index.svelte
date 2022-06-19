@@ -1,14 +1,18 @@
-<script>
+<script lang="ts">
 	import Badge from '@components/Badge.svelte';
 	import Card from '@components/Card.svelte';
 	import Hero from '@components/Hero.svelte';
-	import { text } from 'svelte/internal';
+	import Navbar from '@components/Navbar.svelte';
+	import { onMount } from 'svelte';
+	import { login, register } from '../api/auth';
 </script>
 
-<Hero />
-
 <main class="container max-w-6xl mx-auto mt-20 mb-52">
-	<h1 class="text-center text-6xl text-white font-bold mb-20 tracking-wider ">The Blog</h1>
+	<div>
+		<h1 class="text-center text-6xl text-white font-bold  tracking-wider">The Blog</h1>
+		<p class="text-center text-gray-400 text-lg mb-20">Repository of the gratest blogs.</p>
+	</div>
+
 	<div class="flex mx-auto max-w-md gap-6 justify-center my-5">
 		<Badge text="Tech" />
 		<Badge text="Tech" />
@@ -19,9 +23,10 @@
 	<section class="px-2 mt-16">
 		<div class="max-w-2xl mx-auto flex justify-between">
 			<h2 class="text-white text-3xl font-medium">Latest</h2>
-			<button
+			<a
+				href="/create"
 				class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-				>Create</button
+				>Create</a
 			>
 		</div>
 		<div class="flex flex-col gap-7 mt-12">

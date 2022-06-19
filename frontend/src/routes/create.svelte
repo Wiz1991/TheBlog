@@ -1,0 +1,31 @@
+<script lang="ts">
+	import MarkdownEditor from '@components/MarkdownEditor.svelte';
+
+	interface CreateBlog {
+		title: string;
+		content: string;
+	}
+
+	let blog: CreateBlog = { title: '', content: '' };
+</script>
+
+<main class="container mt-20 mb-52 px-3 max-w-3xl mx-auto">
+	<h1 class="text-white  text-3xl font-medium">Create Blog</h1>
+
+	<form class="my-10">
+		<label for="title" class="block mb-2 text-sm  text-white font-semibold">Title</label>
+		<input
+			type="text"
+			id="title"
+			class="bg-gray-50 border md:max-w-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+			placeholder="John"
+			bind:value={blog.title}
+			required
+		/>
+		<MarkdownEditor bind:markdown={blog.content} />
+
+		<div class="w-full flex justify-end">
+			<button type="submit" class="text-white bg-blue-500 rounded-lg px-6 py-2">Create</button>
+		</div>
+	</form>
+</main>

@@ -13,7 +13,9 @@ const config = {
 		vite: {
 			resolve: {
 				alias: [
-					{ find: '@components', replacement: "/src/components" }
+					{ find: '@components', replacement: "/src/components" },
+					{ find: '@api', replacement: "/src/api" },
+					{ find: '@stores', replacement: "/src/stores" }
 				]
 			}
 		}
