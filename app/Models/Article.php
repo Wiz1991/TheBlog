@@ -37,6 +37,8 @@ class Article extends Model
     }
 
     public function getFiltered(array $filters): Collection {
+
+
         return $this->filter($filters, 'tag', 'tags', 'name')
             ->filter($filters, 'author', 'user', 'username')
             ->when(array_key_exists('offset', $filters), function ($q) use ($filters) {
@@ -55,7 +57,6 @@ class Article extends Model
     public function setTitleAttribute(string $title): void
     {
         $this->attributes['title'] = $title;
-
         $this->attributes['slug'] = Str::slug($title);
     }
 }

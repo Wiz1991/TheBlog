@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\DestroyRequest;
 use App\Http\Requests\Article\IndexRequest;
 use App\Http\Requests\Article\StoreRequest;
@@ -10,10 +11,13 @@ use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use App\Models\User;
+use Validator;
 use App\Services\ArticleService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Log;
 
-class ArticleController extends Controller
+class ArticleController extends BaseController
 {
     protected Article $article;
     protected ArticleService $articleService;
@@ -32,7 +36,8 @@ class ArticleController extends Controller
     }
 
     public function store(StoreRequest $request): ArticleResource {
-        $article = auth()->user()->articles()->create($request->validated()['article']);
+
+        $article = Auth::guard()->user()->articles()->create($request->validated()['article']);
 
         $this->articleService->syncTags($article, $request->validated()['article']['tagList'] ?? []);
 

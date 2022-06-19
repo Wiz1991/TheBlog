@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\API\ArticleController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,12 @@ Route::prefix('articles')->group(function () {
     Route::get('{article}', [ArticleController::class, 'show']);
 });
 
-Route::middleware('auth')->group(function () {
+Route::controller(AuthController::class)->group(function(){
+    Route::post('register', 'register');
+    Route::post('login', 'login');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('articles')->group(function () {
         Route::post('/', [ArticleController::class, 'store']);

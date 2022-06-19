@@ -18,4 +18,5 @@ class IndexRequest extends \Illuminate\Foundation\Http\FormRequest
             'offset' => 'sometimes|integer'
         ];
     }
+
 }
