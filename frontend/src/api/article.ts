@@ -52,3 +52,11 @@ export function createArticle(
 		}
 	);
 }
+
+export function deleteArticle(slug: string, token: string) {
+	return axios.delete(`${BASE_URL}/api/articles/${slug}`, {
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	});
+}
