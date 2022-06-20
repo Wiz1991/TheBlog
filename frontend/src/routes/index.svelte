@@ -1,10 +1,33 @@
 <script lang="ts">
 	import Badge from '@components/Badge.svelte';
 	import Card from '@components/Card.svelte';
-	import Hero from '@components/Hero.svelte';
-	import Navbar from '@components/Navbar.svelte';
+	import { getArticles, type Article, type ArticleCollection } from '@api/article';
 	import { onMount } from 'svelte';
-	import { login, register } from '../api/auth';
+	import { articles } from '../stores/articles';
+	import { getTags } from '@api/tags';
+	import axios from 'axios';
+
+	let currentPage = 0;
+	let limit = 5;
+
+	onMount(async () => {
+		const response = await getArticles(currentPage * limit);
+		articles.reset();
+		articles.append(response.data.articles);
+	});
+
+	const loadMore = async () => {
+		const response = await getArticles(currentPage * limit);
+		if (!response.data.articles.length) {
+			currentPage -= 1;
+			return;
+		}
+		articles.append(response.data.articles);
+	};
+
+	const loadTags = async () => {};
+
+	$: currentPage && loadMore();
 </script>
 
 <main class="container max-w-6xl mx-auto mt-20 mb-52">
@@ -14,10 +37,13 @@
 	</div>
 
 	<div class="flex mx-auto max-w-md gap-6 justify-center my-5">
-		<Badge text="Tech" />
-		<Badge text="Tech" />
-		<Badge text="Tech" />
-		<Badge text="Tech" />
+		{#await getTags()}
+			<p class="text-white">Loading Tags...</p>
+		{:then response}
+			{#each response.tags as tag}
+				<Badge text={tag} />
+			{/each}
+		{/await}
 	</div>
 
 	<section class="px-2 mt-16">
@@ -29,19 +55,16 @@
 				>Create</a
 			>
 		</div>
-		<div class="flex flex-col gap-7 mt-12">
-			<Card
-				description="Dui urna vehicula tincidunt pretium consequat luctus mi, platea fermentum conubia tempus ac orci. Pellentesque dictum malesuada cubilia faucibus dignissim mi nascetur senectus, augue ad libero efficitur dolor duis lobortis, non etiam sociosqu."
-				title="Lorem ipsum dolor sit amet"
-			/>
-			<Card
-				description="Dui urna vehicula tincidunt pretium consequat luctus mi, platea fermentum conubia tempus ac orci. Pellentesque dictum malesuada cubilia faucibus dignissim mi nascetur senectus, augue ad libero efficitur dolor duis lobortis, non etiam sociosqu."
-				title="Lorem ipsum dolor sit amet"
-			/>
-			<Card
-				description="Dui urna vehicula tincidunt pretium consequat luctus mi, platea fermentum conubia tempus ac orci. Pellentesque dictum malesuada cubilia faucibus dignissim mi nascetur senectus, augue ad libero efficitur dolor duis lobortis, non etiam sociosqu."
-				title="Lorem ipsum dolor sit amet"
-			/>
+		<section class="flex flex-col gap-2 my-5">
+			{#each $articles as article}
+				<Card {article} />
+			{/each}
+		</section>
+		<div class="w-full flex justify-center">
+			<button
+				class="text-white rounded-md px-4 py-2 bg-blue-500"
+				on:click={() => (currentPage += 1)}>Load more</button
+			>
 		</div>
 	</section>
 </main>

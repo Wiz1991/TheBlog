@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { login, type LoginRequest } from '@api/auth';
-	import { user } from '../stores/user.store';
+	import { user } from '../stores/user';
+	import { goto } from '$app/navigation';
 
 	let formData: LoginRequest = { email: '', password: '' };
 
 	const onSubmit = async () => {
 		const userData = await login(formData);
 		user.login(userData.data);
+		goto('/');
 	};
 </script>
 

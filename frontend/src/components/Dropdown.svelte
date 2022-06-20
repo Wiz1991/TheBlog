@@ -3,7 +3,7 @@
 	import { scale } from 'svelte/transition';
 	import FaChevronDown from 'svelte-icons/fa/FaChevronDown.svelte';
 	import FaChevronUp from 'svelte-icons/fa/FaChevronUp.svelte';
-	import { user } from '../stores/user.store';
+	import { user } from '../stores/user';
 
 	let show = false; // menu state
 	let menu: HTMLDivElement | null = null; // menu wrapper DOM reference
@@ -40,10 +40,11 @@
 			class="menu focus:outline-none focus:shadow-solid flex items-center"
 		>
 			<img
-				class="w-8 h-8 mx-1 rounded-full"
-				src="https://picsum.photos/seed/${$user?.username}/50/50"
+				class="w-8 h-8  rounded-full"
+				src="https://picsum.photos/seed/${$user.username}/50/50"
 				alt={'avatar'}
 			/>
+			<span class="ml-2 mx-1 text-white text-sm">{$user?.username}</span>
 			{#if show}
 				<div class="w-4 h-4 text-gray-300">
 					<FaChevronUp />

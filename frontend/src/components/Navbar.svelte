@@ -3,7 +3,7 @@
 	import { scale } from 'svelte/transition';
 	import FaBars from 'svelte-icons/fa/FaBars.svelte';
 	import { page } from '$app/stores';
-	import { user } from '../stores/user.store';
+	import { user } from '../stores/user';
 	let expanded = false;
 
 	$: currentPage = $page.url.pathname;

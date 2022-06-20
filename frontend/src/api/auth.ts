@@ -1,3 +1,4 @@
+import { BASE_URL } from '@api/base';
 import axios, { type AxiosResponse } from 'axios';
 import type { User } from 'src/stores/user.store';
 export interface LoginRequest {
@@ -11,7 +12,7 @@ export interface RegisterRequest {
 	username: string;
 }
 
-const BASE_URL = 'http://localhost:8000';
+
 
 export async function login(payload: LoginRequest): Promise<AxiosResponse<User>> {
 	axios.defaults.withCredentials = true;
@@ -22,6 +23,6 @@ export async function login(payload: LoginRequest): Promise<AxiosResponse<User>>
 	});
 }
 
-export async function register(payload: RegisterRequest) {
+export async function register(payload: RegisterRequest): Promise<AxiosResponse<User>> {
 	return axios.post(`${BASE_URL}/api/register`, payload);
 }

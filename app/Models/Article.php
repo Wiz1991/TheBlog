@@ -45,6 +45,7 @@ class Article extends Model
                 $q->offset($filters['offset'])->limit($filters['limit']);
             })
             ->with('user', 'users', 'tags')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
     public function scopeFilter($query, array $filters, string $key, string $relation, string $column)
