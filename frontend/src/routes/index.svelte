@@ -5,7 +5,6 @@
 	import { onMount } from 'svelte';
 	import { articles } from '../stores/articles';
 	import { getTags } from '@api/tags';
-	import axios from 'axios';
 
 	let currentPage = 0;
 	let limit = 5;
@@ -32,8 +31,14 @@
 
 <main class="container max-w-6xl mx-auto mt-20 mb-52">
 	<div>
-		<h1 class="text-center text-6xl text-white font-bold  tracking-wider">The Blog</h1>
-		<p class="text-center text-gray-400 text-lg mb-20">Repository of the gratest blogs.</p>
+		<h1
+			class="text-center text-8xl  font-bold  tracking-wider bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent"
+		>
+			The Blog
+		</h1>
+		<p class="text-center text-gray-400 text-lg mb-20 mt-2">
+			The greatest blog collection in the world. Unfiltered.
+		</p>
 	</div>
 
 	<div class="flex mx-auto max-w-md gap-6 justify-center my-5">
