@@ -2,6 +2,7 @@
 	import { register, type RegisterRequest } from '@api/auth';
 	import { user } from '../stores/user';
 	import { goto } from '$app/navigation';
+	import { toast } from '@zerodevx/svelte-toast';
 
 	let formData: RegisterRequest = {
 		email: '',
@@ -10,9 +11,13 @@
 	};
 
 	const onSubmit = async () => {
-		const userData = await register(formData);
-		user.login(userData.data);
-		goto('/');
+		try {
+			const userData = await register(formData);
+			user.login(userData.data);
+			goto('/');
+		} catch (err) {
+			toast.push('Email already in use. ');
+		}
 	};
 </script>
 

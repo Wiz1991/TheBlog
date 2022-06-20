@@ -2,13 +2,18 @@
 	import { login, type LoginRequest } from '@api/auth';
 	import { user } from '../stores/user';
 	import { goto } from '$app/navigation';
+	import { toast } from '@zerodevx/svelte-toast';
 
 	let formData: LoginRequest = { email: '', password: '' };
 
 	const onSubmit = async () => {
-		const userData = await login(formData);
-		user.login(userData.data);
-		goto('/');
+		try {
+			const userData = await login(formData);
+			user.login(userData.data);
+			goto('/');
+		} catch (err) {
+			toast.push("Wrong credentials or user doesn't exist");
+		}
 	};
 </script>
 

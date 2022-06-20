@@ -40,7 +40,7 @@
 		{#await getTags()}
 			<p class="text-white">Loading Tags...</p>
 		{:then response}
-			{#each response.tags as tag}
+			{#each response.tags.slice(0, 5) as tag}
 				<Badge text={tag} />
 			{/each}
 		{/await}
